@@ -1,14 +1,16 @@
 import os
+import sys
 import argparse
 import json
-import openai
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+from llm_client import get_model_name
 from tqdm import tqdm
 from tools import delayed_completion, prepare_data, post_process
 
 
 def predict(args):
-    openai.organization = args.openai_org
-    openai.api_key = os.getenv("OPENAI_API_KEY")
+    if args.model_name == 'auto':
+        args.model_name = get_model_name()
 
     pred_path = args.data_path.split("/")[-1].replace(".json", f"-{args.model_name}{'-temp' + str(round(args.temperature, 1)) if args.temperature > 0 else ''}-pred.json")
     pred_path = os.path.join("predicted_triplet_results", pred_path)
@@ -43,7 +45,7 @@ def predict(args):
             with open(pred_path, 'w') as f:
                 json.dump(data, f)
             print(error)
-            breakpoint()
+            break
         else:
             content, results = post_process(completion, datum['options'])
             data[idx]['content'] = content
@@ -66,8 +68,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", default=None, type=str)
     parser.add_argument("--data_path", default=None, type=str)
-    parser.add_argument("--openai_org", type=str, required=True)
-    parser.add_argument("--model_name", type=str, default="gpt-3.5-turbo")
+    parser.add_argument("--openai_org", type=str, default="")
+    parser.add_argument("--model_name", type=str, default="auto")
     parser.add_argument("--delay", type=int, default=1)
     parser.add_argument("--max_trials", type=int, default=10)
     parser.add_argument("--save_every", type=int, default=50)

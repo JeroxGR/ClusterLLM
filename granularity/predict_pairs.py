@@ -1,10 +1,11 @@
 # the model takes in a pair of  datapoints
 import os
+import sys
 import json
 import argparse
-import openai
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+from llm_client import delayed_completion, extract_content, get_model_name
 from tqdm import tqdm
-from tools import delayed_completion
 
 def prepare_data(prompt, datum):
     postfix = "\n\nPlease respond with 'Yes' or 'No' without explanation."
@@ -12,7 +13,7 @@ def prepare_data(prompt, datum):
     return prompt + input_txt + postfix
 
 def post_process(completion):
-    content = completion['choices'][0]['message']['content'].strip()
+    content = extract_content(completion)
     result = []
     if 'Yes' in content and 'No' not in content:
         result.append('Yes')
@@ -21,8 +22,8 @@ def post_process(completion):
     return content, result
 
 def predict(args):
-    openai.organization = args.openai_org
-    openai.api_key = os.getenv("OPENAI_API_KEY")
+    if args.model_name == 'auto':
+        args.model_name = get_model_name()
 
     prompt_file_name = args.prompt_file.split("/")[-1].split(".")[0]
 
@@ -84,7 +85,7 @@ def predict(args):
                     data = {"num_clusters": num_clusters, "test_inputs": data}
                 json.dump(data, f)
             print(error)
-            breakpoint()
+            break
         else:
             content, results = post_process(completion)
             data[idx]['content'] = content
@@ -114,8 +115,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--dataset", default=None, type=str)
     parser.add_argument("--data_path", default=None, type=str)
-    parser.add_argument("--openai_org", type=str, required=True)
-    parser.add_argument("--model_name", type=str, default="gpt-4")
+    parser.add_argument("--openai_org", type=str, default="")
+    parser.add_argument("--model_name", type=str, default="auto")
     parser.add_argument("--delay", type=int, default=1)
     parser.add_argument("--max_trials", type=int, default=10)
     parser.add_argument("--save_every", type=int, default=50)
