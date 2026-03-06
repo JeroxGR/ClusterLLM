@@ -1,6 +1,6 @@
 """
 Unified LLM client for ClusterLLM.
-Supports: OpenAI, DeepSeek, Qwen (Dashscope), Llama (via Together AI / Groq / local).
+Supports: Groq (Llama, DeepSeek, Qwen, etc.), OpenAI, DeepSeek, Qwen, Together AI.
 
 All providers use OpenAI-compatible APIs, so we use the openai SDK with different base_url.
 Configure via environment variables or pass directly.
@@ -9,17 +9,23 @@ Usage:
     from llm_client import get_client, get_model_name, delayed_completion
 
 Environment Variables:
-    LLM_PROVIDER     - one of: openai, deepseek, qwen, llama (default: openai)
+    LLM_PROVIDER     - one of: groq, openai, deepseek, qwen, llama (default: groq)
     LLM_API_KEY      - API key for the chosen provider
     LLM_BASE_URL     - (optional) override the base URL
     LLM_MODEL        - (optional) override the model name
 
 Provider defaults:
-    openai:   model=gpt-4o-mini,   base_url=https://api.openai.com/v1
-    deepseek: model=deepseek-chat, base_url=https://api.deepseek.com
-    qwen:     model=qwen-plus,     base_url=https://dashscope.aliyuncs.com/compatible-mode/v1
+    groq:     model=llama-3.3-70b-versatile, base_url=https://api.groq.com/openai/v1
+    openai:   model=gpt-4o-mini,             base_url=https://api.openai.com/v1
+    deepseek: model=deepseek-chat,           base_url=https://api.deepseek.com
+    qwen:     model=qwen-plus,               base_url=https://dashscope.aliyuncs.com/compatible-mode/v1
     llama:    model=meta-llama/Llama-3.1-8B-Instruct-Turbo, base_url=https://api.together.xyz/v1
-              (for Groq: base_url=https://api.groq.com/openai/v1, model=llama-3.1-8b-instant)
+
+Groq available models (set LLM_MODEL to switch):
+    llama-3.3-70b-versatile        (Llama 3.3 70B)
+    deepseek-r1-distill-llama-70b  (DeepSeek R1 70B)
+    qwen-qwq-32b                   (Qwen QwQ 32B)
+    llama-3.1-8b-instant           (Llama 3.1 8B - fastest)
 """
 
 import os
@@ -34,6 +40,11 @@ except ImportError:
     pass
 
 PROVIDER_DEFAULTS = {
+    "groq": {
+        "base_url": "https://api.groq.com/openai/v1",
+        "model": "llama-3.3-70b-versatile",
+        "env_key": "GROQ_API_KEY",
+    },
     "openai": {
         "base_url": "https://api.openai.com/v1",
         "model": "gpt-4o-mini",
@@ -60,7 +71,7 @@ _client = None
 
 
 def get_provider():
-    return os.getenv("LLM_PROVIDER", "openai").lower()
+    return os.getenv("LLM_PROVIDER", "groq").lower()
 
 
 def get_client():
@@ -92,18 +103,20 @@ def get_model_name():
 
 
 def delayed_completion(delay_in_seconds=1, max_trials=1, **kwargs):
-    """Call the chat completions API with retry logic. Works with any provider."""
+    """Call the chat completions API with retry logic and exponential backoff for rate limits."""
     time.sleep(delay_in_seconds)
 
     client = get_client()
     output, error = None, None
-    for _ in range(max_trials):
+    for attempt in range(max_trials):
         try:
             output = client.chat.completions.create(**kwargs)
             break
         except Exception as e:
             error = e
-            time.sleep(delay_in_seconds)
+            # Exponential backoff: 2s, 4s, 8s, 16s, 32s...
+            backoff = min(delay_in_seconds * (2 ** (attempt + 1)), 60)
+            time.sleep(backoff)
     return output, error
 
 

@@ -12,7 +12,8 @@ def predict(args):
     if args.model_name == 'auto':
         args.model_name = get_model_name()
 
-    pred_path = args.data_path.split("/")[-1].replace(".json", f"-{args.model_name}{'-temp' + str(round(args.temperature, 1)) if args.temperature > 0 else ''}-pred.json")
+    safe_model = args.model_name.replace("/", "-")
+    pred_path = args.data_path.split("/")[-1].replace(".json", f"-{safe_model}{'-temp' + str(round(args.temperature, 1)) if args.temperature > 0 else ''}-pred.json")
     pred_path = os.path.join("predicted_triplet_results", pred_path)
     print("Save in: ", pred_path)
     if os.path.exists(pred_path):
