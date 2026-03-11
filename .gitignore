@@ -1,0 +1,17 @@
+# Secrets
+*.env
+*.key
+
+# Models & large files
+*.bin
+*.pt
+datasets/
+cache/
+
+# Python
+__pycache__/
+*.pyc
+
+# Logs
+logs/
+outputs/
