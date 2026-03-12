@@ -1,8 +1,21 @@
 # ClusterLLM: Large Language Models as a Guide for Text Clustering
 
+## Team Members
+
+| Name | Role |
+|------|------|
+| **GRICH Mohamed** | Team Member |
+| **BAKHI Dia Eddine** | Team Member |
+| **MEGHATRIA M'hamed Rayane** | Team Member |
+| **DAO Hoang Duy** | Team Member |
+
+---
+
 This repository contains the implementation of **ClusterLLM**, based on the paper [ClusterLLM: Large Language Models as a Guide for Text Clustering (EMNLP 2023)](https://arxiv.org/abs/2305.14871) by Yuwei Zhang, Zihan Wang, and Jingbo Shang.
 
 ## Overview
+
+![ClusterLLM Architecture](Proposed/image/overall_v6.jpg)
 
 ClusterLLM is a novel framework that leverages Large Language Models (LLMs) to guide and improve text clustering. Traditional text clustering methods struggle with two fundamental challenges:
 
