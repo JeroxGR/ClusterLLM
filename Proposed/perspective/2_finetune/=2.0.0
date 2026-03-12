@@ -1,0 +1,89 @@
+Collecting tensorflow
+  Downloading tensorflow-2.20.0-cp39-cp39-win_amd64.whl.metadata (4.6 kB)
+Collecting absl-py>=1.0.0 (from tensorflow)
+  Downloading absl_py-2.3.1-py3-none-any.whl.metadata (3.3 kB)
+Requirement already satisfied: astunparse>=1.6.0 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorflow) (1.6.3)
+Collecting flatbuffers>=24.3.25 (from tensorflow)
+  Downloading flatbuffers-25.12.19-py2.py3-none-any.whl.metadata (1.0 kB)
+Requirement already satisfied: gast!=0.5.0,!=0.5.1,!=0.5.2,>=0.2.1 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorflow) (0.4.0)
+Requirement already satisfied: google_pasta>=0.1.1 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorflow) (0.2.0)
+Requirement already satisfied: libclang>=13.0.0 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorflow) (16.0.6)
+Requirement already satisfied: opt_einsum>=2.3.2 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorflow) (3.3.0)
+Requirement already satisfied: packaging in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorflow) (23.2)
+Collecting protobuf>=5.28.0 (from tensorflow)
+  Downloading protobuf-6.33.5-cp39-cp39-win_amd64.whl.metadata (593 bytes)
+Requirement already satisfied: requests<3,>=2.21.0 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorflow) (2.32.3)
+Requirement already satisfied: setuptools in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorflow) (67.8.0)
+Requirement already satisfied: six>=1.12.0 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorflow) (1.15.0)
+Requirement already satisfied: termcolor>=1.1.0 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorflow) (1.1.0)
+Requirement already satisfied: typing_extensions>=3.6.6 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorflow) (4.12.2)
+Requirement already satisfied: wrapt>=1.11.0 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorflow) (1.12.1)
+Requirement already satisfied: grpcio<2.0,>=1.24.3 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorflow) (1.60.0)
+Requirement already satisfied: tensorboard~=2.20.0 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorflow) (2.20.0)
+Collecting keras>=3.10.0 (from tensorflow)
+  Downloading keras-3.10.0-py3-none-any.whl.metadata (6.0 kB)
+Collecting numpy>=1.26.0 (from tensorflow)
+  Using cached numpy-2.0.2-cp39-cp39-win_amd64.whl.metadata (59 kB)
+Collecting h5py>=3.11.0 (from tensorflow)
+  Downloading h5py-3.14.0-cp39-cp39-win_amd64.whl.metadata (2.7 kB)
+Collecting ml_dtypes<1.0.0,>=0.5.1 (from tensorflow)
+  Downloading ml_dtypes-0.5.4-cp39-cp39-win_amd64.whl.metadata (9.2 kB)
+Requirement already satisfied: wheel<1.0,>=0.23.0 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from astunparse>=1.6.0->tensorflow) (0.42.0)
+Requirement already satisfied: rich in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from keras>=3.10.0->tensorflow) (13.7.0)
+Requirement already satisfied: namex in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from keras>=3.10.0->tensorflow) (0.0.8)
+Requirement already satisfied: optree in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from keras>=3.10.0->tensorflow) (0.19.0)
+Requirement already satisfied: charset-normalizer<4,>=2 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from requests<3,>=2.21.0->tensorflow) (3.2.0)
+Requirement already satisfied: idna<4,>=2.5 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from requests<3,>=2.21.0->tensorflow) (3.4)
+Requirement already satisfied: urllib3<3,>=1.21.1 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from requests<3,>=2.21.0->tensorflow) (2.0.4)
+Requirement already satisfied: certifi>=2017.4.17 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from requests<3,>=2.21.0->tensorflow) (2023.5.7)
+Requirement already satisfied: markdown>=2.6.8 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorboard~=2.20.0->tensorflow) (3.5.1)
+Requirement already satisfied: pillow in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorboard~=2.20.0->tensorflow) (9.5.0)
+Requirement already satisfied: tensorboard-data-server<0.8.0,>=0.7.0 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorboard~=2.20.0->tensorflow) (0.7.2)
+Requirement already satisfied: werkzeug>=1.0.1 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from tensorboard~=2.20.0->tensorflow) (3.0.1)
+Requirement already satisfied: importlib-metadata>=4.4 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from markdown>=2.6.8->tensorboard~=2.20.0->tensorflow) (6.8.0)
+Requirement already satisfied: MarkupSafe>=2.1.1 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from werkzeug>=1.0.1->tensorboard~=2.20.0->tensorflow) (2.1.3)
+Requirement already satisfied: markdown-it-py>=2.2.0 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from rich->keras>=3.10.0->tensorflow) (3.0.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from rich->keras>=3.10.0->tensorflow) (2.16.1)
+Requirement already satisfied: zipp>=0.5 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from importlib-metadata>=4.4->markdown>=2.6.8->tensorboard~=2.20.0->tensorflow) (3.15.0)
+Requirement already satisfied: mdurl~=0.1 in c:\users\home\appdata\local\programs\python\python39\lib\site-packages (from markdown-it-py>=2.2.0->rich->keras>=3.10.0->tensorflow) (0.1.2)
+Downloading tensorflow-2.20.0-cp39-cp39-win_amd64.whl (331.7 MB)
+   ---------------------------------------- 331.7/331.7 MB 5.5 MB/s eta 0:00:00
+Downloading absl_py-2.3.1-py3-none-any.whl (135 kB)
+Downloading flatbuffers-25.12.19-py2.py3-none-any.whl (26 kB)
+Downloading h5py-3.14.0-cp39-cp39-win_amd64.whl (2.9 MB)
+   ---------------------------------------- 2.9/2.9 MB 5.8 MB/s eta 0:00:00
+Downloading keras-3.10.0-py3-none-any.whl (1.4 MB)
+   ---------------------------------------- 1.4/1.4 MB 5.1 MB/s eta 0:00:00
+Downloading ml_dtypes-0.5.4-cp39-cp39-win_amd64.whl (210 kB)
+Using cached numpy-2.0.2-cp39-cp39-win_amd64.whl (15.9 MB)
+Downloading protobuf-6.33.5-cp39-cp39-win_amd64.whl (437 kB)
+Installing collected packages: flatbuffers, protobuf, numpy, absl-py, ml_dtypes, h5py, keras, tensorflow
+  Attempting uninstall: flatbuffers
+    Found existing installation: flatbuffers 1.12
+    Uninstalling flatbuffers-1.12:
+      Successfully uninstalled flatbuffers-1.12
+  Attempting uninstall: protobuf
+    Found existing installation: protobuf 3.20.1
+    Uninstalling protobuf-3.20.1:
+      Successfully uninstalled protobuf-3.20.1
+  Attempting uninstall: numpy
+    Found existing installation: numpy 1.22.4
+    Uninstalling numpy-1.22.4:
+      Successfully uninstalled numpy-1.22.4
+  Attempting uninstall: absl-py
+    Found existing installation: absl-py 0.15.0
+    Uninstalling absl-py-0.15.0:
+      Successfully uninstalled absl-py-0.15.0
+  Attempting uninstall: ml_dtypes
+    Found existing installation: ml-dtypes 0.4.1
+    Uninstalling ml-dtypes-0.4.1:
+      Successfully uninstalled ml-dtypes-0.4.1
+  Attempting uninstall: h5py
+    Found existing installation: h5py 3.1.0
+    Uninstalling h5py-3.1.0:
+      Successfully uninstalled h5py-3.1.0
+  Attempting uninstall: keras
+    Found existing installation: keras 2.6.0
+    Uninstalling keras-2.6.0:
+      Successfully uninstalled keras-2.6.0
+Successfully installed absl-py-2.3.1 flatbuffers-25.12.19 h5py-3.14.0 keras-3.10.0 ml_dtypes-0.5.4 numpy-2.0.2 protobuf-6.33.5 tensorflow-2.20.0
